@@ -1,0 +1,33 @@
+@startuml Deployment Frequency
+
+participant Prometheus as prom
+participant Application as app
+box "External Service" #LightBlue
+participant Bitbucket as git
+participant Jira as issue
+end box
+
+group Each 30 seconds
+	prom -> app : get metrics
+	activate app
+		app -> prom : return metrics
+	deactivate app
+end
+group Each 24 hour
+	app -> app : Calculate median or average\nof the Deployment Frequency
+	activate app
+		app -> git : get pipelines between period date
+		activate git
+			app <- git : return pipelines
+		deactivate git
+		return Calculate median or average\nDeployment Frequency
+		note over app
+			Deployment frequency is calculated as the
+			median or mean of the time differences from
+			one version being deployed to the next being
+			deployed.
+		end note
+	deactivate app
+end
+
+@enduml

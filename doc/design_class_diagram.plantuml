@@ -1,0 +1,61 @@
+@startuml
+
+class Issue {
+	{field} +id : Number
+	{field} +key : Text
+}
+
+
+class Issue$Fields {
+	{field} +created : Date
+	{field} +resolutionDate : Date
+}
+
+
+class Issue$Fields$IssueType {
+	{field} +name : Text
+}
+
+
+class Commit {
+	{field} +date : Date
+	{field} +id : Text
+	{field} +message : Text
+}
+
+
+class Pipeline {
+	{field} +completed : Date
+	{field} +created : Date
+}
+
+
+class Pipeline$State {
+}
+
+
+class Pipeline$State$Result {
+	{field} +name : Text
+}
+
+
+class Pipeline$Target {
+	{field} +name : Text
+	{field} +tipo : Text
+}
+
+
+class PullRequest {
+	{field} +closedDate : Date
+	{field} +createdDate : Date
+	{field} +id : Number
+}
+
+'Entities
+Issue "1" --> "0..*" Issue$Fields : fields
+Issue$Fields "1" --> "1" Issue$Fields$IssueType : type
+Pipeline "1" --> "1" Pipeline$State : state
+Pipeline "1" --> "1" Pipeline$Target : target
+Pipeline$State "1" --> "1" Pipeline$State$Result : result
+
+@enduml

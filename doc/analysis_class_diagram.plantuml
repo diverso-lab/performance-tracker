@@ -1,0 +1,299 @@
+@startuml
+
+class org.g7i.four.metrics.controllers.GitController {
+	{method} +getAllCommits ( paramboolean1 : boolean , paramString2 : String ) : java.util.List
+	{method} +getBuildsInPeriod ( paramboolean1 : boolean ) : java.util.List
+	{method} +getBuildsTimeInPeriod () : Double
+	{method} +getCommit ( paramString1 : String ) : org.g7i.four.metrics.models.entities.stash.Commit
+	{method} +getMergedCommitsCountInPeriod () : Integer
+	{method} +getMergedCommitsInPeriod () : java.util.List
+	{method} +getNumberBuildsInPeriod ( paramboolean1 : boolean ) : Integer
+	{method} +getNumberPipelinesInPeriod ( paramboolean1 : boolean ) : Integer
+	{method} +getPipelinesInPeriod ( paramboolean1 : boolean ) : java.util.List
+}
+
+
+class org.g7i.four.metrics.controllers.IssueController {
+	{method} +getAllIssuesClosedCountInPeriod () : Integer
+	{method} +getAllIssuesClosedInPeriod () : java.util.List
+	{method} +getAllIssuesRaisedCountInPeriod () : Integer
+	{method} +getAllIssuesRaisedInPeriod () : java.util.List
+	{method} +getIncidentsClosedCountInPeriod () : Integer
+	{method} +getIncidentsClosedInPeriod () : java.util.List
+	{method} +getIncidentsRaisedCountInPeriod () : Integer
+	{method} +getIncidentsRaisedInPeriod () : java.util.List
+}
+
+
+class org.g7i.four.metrics.models.dtos.stash.CommitDto {
+	{field} +id : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.issue.Issue {
+	{field} +id : Integer
+	{field} +key : String
+	{field} +self : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.issue.Issue$Fields {
+	{field} +created : java.util.Date
+	{field} +resolutionDate : java.util.Date
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.issue.Issue$Fields$IssueType {
+	{field} +name : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.issue.SearchIssue {
+	{field} +maxResults : Integer
+	{field} +startAt : Integer
+	{field} +total : Integer
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.Commit {
+	{field} +date : java.util.Date
+	{field} +id : String
+	{field} +message : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.Pipeline {
+	{field} +completed : java.util.Date
+	{field} +created : java.util.Date
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.Pipeline$State {
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.Pipeline$State$Result {
+	{field} +name : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.Pipeline$Target {
+	{field} +name : String
+	{field} +tipo : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+class org.g7i.four.metrics.models.entities.stash.PullRequest {
+	{field} +closedDate : java.util.Date
+	{field} +createdDate : java.util.Date
+	{field} +id : Integer
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method}  {static} +of () : org.g7i.four.metrics.models.entities.stash.PullRequest
+	{method} +toString () : String
+}
+
+
+interface org.g7i.four.metrics.models.restservices.BitbucketRestService {
+	{method}  {abstract} +getCommit ( paramString1 : String , paramString2 : String , paramString3 : String ) : org.g7i.four.metrics.util.Page
+	{method}  {abstract} +getCommits ( paramString1 : String , paramString2 : String ) : org.g7i.four.metrics.util.Page
+	{method}  {abstract} +getCommits ( paramString1 : String , paramString2 : String , paramInteger3 : Integer ) : org.g7i.four.metrics.util.Page
+	{method}  {abstract} +getPipelines ( paramString1 : String , paramString2 : String ) : org.g7i.four.metrics.util.Page
+	{method}  {abstract} +getPipelines ( paramString1 : String , paramString2 : String , paramInteger3 : Integer ) : org.g7i.four.metrics.util.Page
+	{method} +lookupAuth () : String
+}
+
+
+interface org.g7i.four.metrics.models.restservices.JiraRestService {
+	{method}  {abstract} +getSearchJQL ( paramString1 : String ) : org.g7i.four.metrics.models.entities.issue.SearchIssue
+	{method} +lookupAuth () : String
+}
+
+
+class org.g7i.four.metrics.models.service.BitbucketPipelineService {
+	{field} ~period : Integer
+	{field} ~repository : String
+	{field} ~workspace : String
+	{method} +getBuildsTimeInPeriod ( paramboolean1 : boolean ) : java.util.List
+	{method} -getOnlyBuilds ( paramList1 : java.util.List ) : java.util.List
+	{method} +getPipelinesInPeriod ( paramboolean1 : boolean , paramboolean2 : boolean ) : java.util.List
+	{method}  {static} -lambda$getBuildsTimeInPeriod$0 ( paramLong1 : Long , paramLong2 : Long ) : Long
+}
+
+
+class org.g7i.four.metrics.models.service.BitbucketService {
+	{field} ~period : Integer
+	{field} ~repository : String
+	{field} ~workspace : String
+	{method} +getAllCommits () : java.util.List
+	{method} +getAllCommits ( paramString1 : String ) : java.util.List
+	{method} +getCommit ( paramString1 : String ) : org.g7i.four.metrics.models.entities.stash.Commit
+	{method} +getCommitsInPeriod () : java.util.List
+	{method} +getCommitsInPeriod ( paramString1 : String ) : java.util.List
+	{method} +getMergedCommitsInPeriod () : java.util.List
+	{method}  {static} -lambda$getAllCommits$0 ( paramString1 : String , paramCommit2 : org.g7i.four.metrics.models.entities.stash.Commit ) : boolean
+	{method}  {static} -lambda$getCommitsInPeriod$1 ( paramString1 : String , paramCommit2 : org.g7i.four.metrics.models.entities.stash.Commit ) : boolean
+	{method}  {static} -lambda$getMergedCommitsInPeriod$2 ( paramCommit1 : org.g7i.four.metrics.models.entities.stash.Commit ) : boolean
+}
+
+
+interface org.g7i.four.metrics.models.service.IGitService {
+	{method}  {abstract} +getAllCommits () : java.util.List
+	{method}  {abstract} +getAllCommits ( paramString1 : String ) : java.util.List
+	{method}  {abstract} +getCommit ( paramString1 : String ) : org.g7i.four.metrics.models.entities.stash.Commit
+	{method}  {abstract} +getCommitsInPeriod () : java.util.List
+	{method}  {abstract} +getCommitsInPeriod ( paramString1 : String ) : java.util.List
+	{method}  {abstract} +getMergedCommitsInPeriod () : java.util.List
+}
+
+
+interface org.g7i.four.metrics.models.service.IIssueService {
+	{method}  {abstract} +getAllIssuesClosedInPeriod () : java.util.List
+	{method}  {abstract} +getAllIssuesRaisedInPeriod () : java.util.List
+	{method}  {abstract} +getIncidentsClosedInPeriod () : java.util.List
+	{method}  {abstract} +getIncidentsRaisedInPeriod () : java.util.List
+}
+
+
+interface org.g7i.four.metrics.models.service.IMetricService {
+	{method}  {abstract} +calculateFailureRate () : Double
+	{method}  {abstract} +calculateIncidentsClosed () : Integer
+	{method}  {abstract} +calculateIncidentsRaised () : Integer
+	{method}  {abstract} +calculateLeadTime () : Double
+	{method}  {abstract} +calculateMTTR () : Double
+	{method}  {abstract} +calculateNumberOfDeployments () : Integer
+	{method}  {abstract} +calculateTimeBetweenDeployments () : Double
+}
+
+
+interface org.g7i.four.metrics.models.service.IPipelineService {
+	{method}  {abstract} +getBuildsTimeInPeriod ( paramboolean1 : boolean ) : java.util.List
+	{method}  {abstract} +getPipelinesInPeriod ( paramboolean1 : boolean , paramboolean2 : boolean ) : java.util.List
+}
+
+
+class org.g7i.four.metrics.models.service.IssueService {
+	{field} ~incidentJql : String
+	{field} ~period : Integer
+	{method} +getAllIssuesClosedInPeriod () : java.util.List
+	{method} +getAllIssuesRaisedInPeriod () : java.util.List
+	{method} +getIncidentsClosedInPeriod () : java.util.List
+	{method} +getIncidentsRaisedInPeriod () : java.util.List
+	{method}  {static} -lambda$getIncidentsClosedInPeriod$0 ( paramIssue1 : org.g7i.four.metrics.models.entities.issue.Issue ) : boolean
+	{method}  {static} -lambda$getIncidentsRaisedInPeriod$1 ( paramIssue1 : org.g7i.four.metrics.models.entities.issue.Issue ) : boolean
+}
+
+
+class org.g7i.four.metrics.models.service.MetricService {
+	{field} ~statisticDeploymentFrequency : String
+	{field} ~statisticFailureRate : String
+	{field} ~statisticLeadTime : String
+	{field} ~statisticMttr : String
+	{method} +calculateFailureRate () : Double
+	{method} +calculateIncidentsClosed () : Integer
+	{method} +calculateIncidentsRaised () : Integer
+	{method} +calculateLeadTime () : Double
+	{method} +calculateMTTR () : Double
+	{method} +calculateNumberOfDeployments () : Integer
+	{method} +calculateTimeBetweenDeployments () : Double
+	{method}  {static} -lambda$0 ( paramIssue1 : org.g7i.four.metrics.models.entities.issue.Issue ) : Long
+	{method}  {static} -lambda$1 ( paramIssue1 : org.g7i.four.metrics.models.entities.issue.Issue ) : Long
+}
+
+
+class org.g7i.four.metrics.scheduler.MetricsScheduler {
+	{field} -deploymentFrequency : Double
+	{field} -failureRate : Double
+	{field} -incidentsClosed : Integer
+	{field} -incidentsRaised : Integer
+	{field} -leadTime : Double
+	{field} -mttr : Double
+	{field} -numberOfDeployments : Integer
+	{field} ~registry : org.eclipse.microprofile.metrics.MetricRegistry
+	{method} ~getMetrics () : void
+}
+
+
+class org.g7i.four.metrics.util.Page {
+	{field} +size : Integer
+	{field} +values : java.util.List
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +isLastPage () : boolean
+	{method} +toString () : String
+}
+
+'Controllers
+org.g7i.four.metrics.controllers.GitController -->  org.g7i.four.metrics.models.service.IGitService : stashService
+org.g7i.four.metrics.controllers.GitController -->  org.g7i.four.metrics.models.service.IMetricService : metricService
+org.g7i.four.metrics.controllers.GitController -->  org.g7i.four.metrics.models.service.IPipelineService : pipelineService
+org.g7i.four.metrics.controllers.IssueController -->  org.g7i.four.metrics.models.service.IIssueService : issueService
+
+'Entities
+org.g7i.four.metrics.models.entities.issue.Issue -->  org.g7i.four.metrics.models.entities.issue.Issue$Fields : fields
+org.g7i.four.metrics.models.entities.issue.Issue$Fields -->  org.g7i.four.metrics.models.entities.issue.Issue$Fields$IssueType : type
+org.g7i.four.metrics.models.entities.issue.SearchIssue "1" o-- "0..*"  org.g7i.four.metrics.models.entities.issue.Issue : issues
+org.g7i.four.metrics.models.entities.stash.Pipeline -->  org.g7i.four.metrics.models.entities.stash.Pipeline$State : state
+org.g7i.four.metrics.models.entities.stash.Pipeline -->  org.g7i.four.metrics.models.entities.stash.Pipeline$Target : target
+org.g7i.four.metrics.models.entities.stash.Pipeline$State -->  org.g7i.four.metrics.models.entities.stash.Pipeline$State$Result : result
+org.g7i.four.metrics.models.entities.stash.Pipeline$Target -->  org.g7i.four.metrics.models.dtos.stash.CommitDto : commit
+
+'Services
+org.g7i.four.metrics.models.service.BitbucketPipelineService -->  org.g7i.four.metrics.models.restservices.BitbucketRestService : bitbucketRestService
+'org.g7i.four.metrics.models.service.BitbucketPipelineService -l->  org.g7i.four.metrics.models.service.BitbucketService : bitbucketService
+org.g7i.four.metrics.models.service.BitbucketPipelineService .u.|>  org.g7i.four.metrics.models.service.IPipelineService
+org.g7i.four.metrics.models.service.BitbucketService -->  org.g7i.four.metrics.models.restservices.BitbucketRestService : bitbucketRestService
+org.g7i.four.metrics.models.service.BitbucketService .u.|>  org.g7i.four.metrics.models.service.IGitService
+org.g7i.four.metrics.models.service.IssueService -u->  org.g7i.four.metrics.models.restservices.JiraRestService : jiraRestService
+org.g7i.four.metrics.models.service.IssueService .u.|>  org.g7i.four.metrics.models.service.IIssueService
+org.g7i.four.metrics.models.service.MetricService -u->  org.g7i.four.metrics.models.service.IGitService : stashService
+org.g7i.four.metrics.models.service.MetricService -u->  org.g7i.four.metrics.models.service.IIssueService : issueService
+org.g7i.four.metrics.models.service.MetricService -u->  org.g7i.four.metrics.models.service.IPipelineService : pipelineService
+org.g7i.four.metrics.models.service.MetricService .u.|>  org.g7i.four.metrics.models.service.IMetricService
+
+'Scheduler
+org.g7i.four.metrics.scheduler.MetricsScheduler -->  org.g7i.four.metrics.models.service.IMetricService : metricService
+
+@enduml

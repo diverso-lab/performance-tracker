@@ -1,0 +1,44 @@
+@startuml Deployment Frequency
+
+participant Prometheus as prom
+participant Application as app
+box "External Service" #LightBlue
+participant Bitbucket as git
+participant Jira as issue
+end box
+
+group Each 30 seconds
+	prom -> app : get metrics
+	activate app
+		app -> prom : return metrics
+	deactivate app
+end
+group Each 24 hour
+	app -> app : Calculate Failure Rate
+	activate app #FFBBBB
+		app -> issue : get incidents raised between period date
+		activate issue
+			app <- issue : return incidents raised
+		deactivate issue
+		app -> app : Calculate deployments number\nbetween period date
+		activate app #DarkSalmon
+			app -> git : get pipelines between period date
+			activate git
+			app <- git : return pipelines
+			deactivate git
+			return Calculate deployments number\nbetween period date
+			note right app
+				Filter by state pipelines
+				contains a version number
+			end note
+		deactivate app
+		return Calculate Failure Rate
+		note over app
+			Failure Rate is calculated as a ratio
+			between incidents raised and number
+			of deployed builds
+		end note
+	deactivate app
+end
+
+@enduml

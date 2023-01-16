@@ -1,0 +1,33 @@
+@startuml Deployment Frequency
+
+participant Prometheus as prom
+participant Application as app
+box "External Service" #LightBlue
+participant Bitbucket as git
+participant Jira as issue
+end box
+
+group Each 30 seconds
+	prom -> app : get metrics
+	activate app
+		app -> prom : return metrics
+	deactivate app
+end
+group Each 24 hour
+	app -> app : Calculate median or average\nof the MTTR
+	activate app
+		app -> issue : get incidents closed between period date
+		activate issue
+			app <- issue : return incidents closed
+		deactivate issue
+		return Calculate median or average\nof the MTTR
+		note over app
+			Deployment frequency s calculated as
+			the median or the mean of the time
+			differences from when incident is
+			opened until it is closed.
+		end note
+	deactivate app
+end
+
+@enduml
