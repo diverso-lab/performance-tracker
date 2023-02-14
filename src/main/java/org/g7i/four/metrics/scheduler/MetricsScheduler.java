@@ -46,13 +46,13 @@ public class MetricsScheduler {
 			LOG.info("Number of Releases: "+ this.getGithubNumberOfReleases());
 			//Deployment Frequency
 			LOG.info("Deployment Frequency (days): "+ this.getGithubDeploymentFrequency());
-			LOG.info("Deployment Frequency variance: "+ this.getGithubDeploymentFrequencyVariance());
+			LOG.info("Deployment Frequency standard deviation: "+ this.getGithubDeploymentFrequencyVariance());
 			//Lead Time For Changes
 			LOG.info("Lead Time For Changes (days): "+ this.getGithubLeadTimeForChanges());
-			LOG.info("Lead Time For Changes variance: "+ this.getGithubLeadTimeForChangesVariance());
+			LOG.info("Lead Time For Changes standard deviation: "+ this.getGithubLeadTimeForChangesVariance());
 			//Time To Restore Service
 			LOG.info("Time To Restore Service (days): "+ this.getGithubTimeToRestoreService());
-			LOG.info("Time To Restore Service variance: "+ this.getGithubTimeToRestoreServiceVariance());
+			LOG.info("Time To Restore Service standard deviation: "+ this.getGithubTimeToRestoreServiceVariance());
 			//Change Failure Rate
 			LOG.info("Change Failure Rate (%): "+ this.getGithubChangeFailureRate()*100);
 			

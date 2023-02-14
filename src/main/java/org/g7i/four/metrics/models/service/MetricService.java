@@ -13,6 +13,7 @@ public class MetricService implements IMetricService {
 	@Inject
 	IGitHubService githubService;
 
+
 	/**
 	 * Returns mean and variance of the elements of a list
 	 * 
@@ -21,7 +22,7 @@ public class MetricService implements IMetricService {
 	public Tuple2<Double,Double> calculateMeanAndVariance(List<Long> list) {
 
 		//We divide the elements of the list by a number to transform the results to days
-		int divider = 86400000;
+		double divider = 86400000.0;
 
 		Double mean = 0.0;
 		for(int i = 0; i < list.size(); i++){
@@ -34,8 +35,10 @@ public class MetricService implements IMetricService {
 			variance += Math.pow(list.get(i)/divider - mean, 2);
 		}
 		variance = variance/list.size();
+		
+		Double standardDeviation = Math.sqrt(variance);
 
-		return Tuple2.of(mean,variance);
+		return Tuple2.of(mean,standardDeviation);
 	}
 
 	/**

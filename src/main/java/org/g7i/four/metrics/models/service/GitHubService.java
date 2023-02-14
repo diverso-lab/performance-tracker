@@ -41,6 +41,7 @@ public class GitHubService implements IGitHubService {
 	@RestClient
 	GitHubRestService githubRestService;
 
+
 	/**
 	 * Returns a date given a string
 	 * 
@@ -186,6 +187,8 @@ public class GitHubService implements IGitHubService {
 
 		List<GithubRelease> releases = this.getGithubReleases();
 
+		releases = releases.stream().sorted(Comparator.comparing(GithubRelease::getPublishedAt)).toList();
+
 		List<Long> lista = StreamEx.of(
 				// Get ordered builds of date completed
 				releases.stream().sorted(Comparator.comparing(GithubRelease::getPublishedAt))
@@ -195,6 +198,7 @@ public class GitHubService implements IGitHubService {
 						.map(Date::getTime))
 				// Pairwise differences
 				.pairMap(((p1, p2) -> p2 - p1)).toList();
+
 		
 		return lista;
 
