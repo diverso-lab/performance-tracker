@@ -19,6 +19,7 @@ In order to run the application, you must download it from this repository and f
 | Project            | GITHUB_OWNER | GITHUB_REPOSITORY | BUG_LABEL |
 | ------------------ | ------------ | ----------------- | --------- |
 | Angular            | angular      | angular           | bug       |
+| Grafana            | grafana      | grafana           | type/bug  |
 | Kubernetes         | kubernetes   | kubernetes        | kind/bug  |
 | TensorFlow         | tensorflow   | tensorflow        | type:bug  |
 | Visual Studio Code | microsoft    | vscode            | bug       |
